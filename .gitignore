@@ -17,3 +17,10 @@ tmp
 _yardoc
 doc/
 tags
+
+#sublimetext files
+.sublime-project
+.sublime-workspace
+*.sublime-project
+
+*.sublime-workspace
