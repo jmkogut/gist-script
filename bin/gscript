@@ -1,3 +1,8 @@
 #!/usr/bin/env ruby
 
 # Insert CLI tool codes here.
+
+unless ARGV.length == 1
+	puts "Incorrect number of arguments"
+	exit
+end
