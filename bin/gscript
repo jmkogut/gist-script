@@ -2,7 +2,36 @@
 
 # Insert CLI tool codes here.
 
-unless ARGV.length == 1
+require 'rubygems'
+require 'Octokit'
+require 'highline/import'
+
+unless (ARGV.length == 1) || (ARGV.length == 2)
 	puts "Incorrect number of arguments"
 	exit
+end
+
+def auth(username)
+	password = get_password()
+
+	client = Octokit::Client.new \
+ 	:login    => username,
+ 	:password => password
+
+ 	begin
+ 		user = client.user
+ 		token = user.create_authorization
+ 	rescue
+ 		puts "incorrect username or password!"
+ 	end
+end
+
+
+def get_password(prompt="Enter Password")
+   	ask(prompt) {|q| q.echo = false}
+end
+
+
+if (ARGV[0] == 'auth')
+	auth(ARGV[1])
 end
