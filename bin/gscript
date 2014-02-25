@@ -27,7 +27,7 @@ def auth(username)
 end
 
 
-def get_password(prompt="Enter Password")
+def get_password(prompt="Enter Password:")
    	ask(prompt) {|q| q.echo = false}
 end
 
