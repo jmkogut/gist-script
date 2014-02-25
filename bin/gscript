@@ -32,6 +32,6 @@ def get_password(prompt="Enter Password")
 end
 
 
-if (ARGV[0] == 'auth')
+if (ARGV[0] == 'auth') && (ARGV.length == 2)
 	auth(ARGV[1])
 end
