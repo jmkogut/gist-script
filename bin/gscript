@@ -8,12 +8,15 @@ require 'highline/import'
 require 'netrc'
 
 
-
+#check for correct number of arguments
 unless (ARGV.length == 1) || (ARGV.length == 2)
 	puts "Incorrect number of arguments"
 	exit
 end
 
+###Argument functions###
+
+#Authorize user and add credentials to .netrc
 def auth(username)
 
 	password = get_password()
@@ -38,12 +41,16 @@ def auth(username)
  	n.save
 end
 
+###Helper functions###
 
+#asks for password
 def get_password(prompt="Enter Password:")
    	ask(prompt) {|q| q.echo = false}
 end
 
+###Argument parsing###
 
+#gscript auth [username]
 if (ARGV[0] == 'auth') && (ARGV.length == 2)
 	auth(ARGV[1])
 end
