@@ -37,8 +37,22 @@ def auth(username)
  	end
 	
 	n = Netrc.read
- 	n["Github.com"] = username, password
+ 	n["api.github.com"] = username, password
  	n.save
+end
+
+#list all gists
+def ls()
+	client = Octokit::Client.new :netrc => true
+	client.login
+
+	username, password = Netrc.read["api.github.com"]
+
+	gists = Octokit.gists(username)
+	
+	gists.each do |g|
+		puts g.names
+	end
 end
 
 ###Helper functions###
@@ -53,4 +67,9 @@ end
 #gscript auth [username]
 if (ARGV[0] == 'auth') && (ARGV.length == 2)
 	auth(ARGV[1])
+end
+
+#gscript ls
+if ((ARGV[0] == "ls") || (ARGV[0] == "list")) && (ARGV.length == 1)
+	ls()
 end
