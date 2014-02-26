@@ -8,4 +8,6 @@ Gem::Specification.new do |s|
   s.homepage    = 'http://github.com/jmkogut/git-script'
   s.files       = ["lib/gscript.rb"]
   s.add_runtime_dependency "octokit", "~> 2.0"
+  s.add_runtime_dependency "highline"
+  s.add_runtime_dependency "netrc", "~> 0.7.7"
 end
