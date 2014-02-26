@@ -5,6 +5,9 @@
 require 'rubygems'
 require 'Octokit'
 require 'highline/import'
+require 'netrc'
+
+
 
 unless (ARGV.length == 1) || (ARGV.length == 2)
 	puts "Incorrect number of arguments"
@@ -21,12 +24,18 @@ def auth(username)
 
  	begin
  		user = client.user
- 		token = user.create_authorization
+ 		user.login
  	rescue
  		puts "could not authorize your credentials!"
  		puts "either your username or password is incorrect,"
  		puts "you are not connected to the internet, or github is down"
+ 		
+ 		exit
  	end
+	
+	n = Netrc.read
+ 	n["Github.com"] = username, password
+ 	n.save
 end
 
 
