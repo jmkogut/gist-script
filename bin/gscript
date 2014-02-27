@@ -56,10 +56,22 @@ def ls()
 		
 		files = gist.files.fields
 		
-		puts gist.description.lines.first
-		
+		description =  gist.description
+
+
+		if (description.lines.first.nil?)
+			puts "[No description]"
+		else
+			elipsis = "\""
+			if (description.lines.count > 1)
+				elipsis = "... \""
+			end
+
+			puts '"' + description.lines.first.chomp + elipsis
+		end
+
 		files.each do |f|
-			puts "      >" + gist.files[f].filename
+			puts "      - " + gist.files[f].filename
 		end
 	end
 end
