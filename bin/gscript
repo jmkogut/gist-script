@@ -48,10 +48,19 @@ def ls()
 
 	username, password = Netrc.read["api.github.com"]
 
-	gists = Octokit.gists(username)
+	gists = client.gists(username)
 	
 	gists.each do |g|
-		puts g.names
+		id = g[:id]
+		gist = client.gist(id)
+		
+		files = gist.files.fields
+		
+		puts gist.description.lines.first
+		
+		files.each do |f|
+			puts "      >" + gist.files[f].filename
+		end
 	end
 end
 
